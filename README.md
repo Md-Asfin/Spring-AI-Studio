@@ -1,11 +1,14 @@
 # 🚀 Spring AI Studio
 
-![Java](https://img.shields.io/badge/Java-21-orange.svg)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4.3-green.svg)
-![Spring AI](https://img.shields.io/badge/Spring_AI-1.0.0--M6-blue.svg)
-![Maven](https://img.shields.io/badge/Maven-3.x-red.svg)
-![React](https://img.shields.io/badge/React-19.0.0-blue.svg)
-![Vite](https://img.shields.io/badge/Vite-6.2.0-yellow.svg)
+Compare • Experiment • Understand AI Models
+
+[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://dev.java/)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4.3-green.svg)](https://spring.io/projects/spring-boot)
+[![Spring AI](https://img.shields.io/badge/Spring_AI-1.0.0--M6-blue.svg)](https://spring.io/projects/spring-ai)
+[![Maven](https://img.shields.io/badge/Maven-3.x-red.svg)](https://maven.apache.org/)
+[![React](https://img.shields.io/badge/React-19.0.0-blue.svg)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6.2.0-yellow.svg)](https://vitejs.dev/)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717.svg?logo=github)](https://github.com/Mohammad-Asfin/Spring-AI-Studio)
 
 ## 📌 Overview
 
