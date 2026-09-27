@@ -8,6 +8,28 @@ const EXAMPLES = [
   "Explain Spring AI ChatClient"
 ];
 
+const Logo = () => (
+  <svg xmlns="http://www.w3.org/2001/svg" viewBox="0 0 512 512" width="32" height="32" className="logo-img">
+    <defs>
+      <linearGradient id="leaf1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#34d399"/>
+        <stop offset="100%" stopColor="#10b981"/>
+      </linearGradient>
+      <linearGradient id="leaf2" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#60a5fa"/>
+        <stop offset="100%" stopColor="#3b82f6"/>
+      </linearGradient>
+    </defs>
+    <path d="M 360 80 Q 360 120 400 120 Q 360 120 360 160 Q 360 120 320 120 Q 360 120 360 80 Z" fill="#fbbf24"/>
+    <path d="M 420 160 Q 420 180 440 180 Q 420 180 400 180 Q 420 180 420 160 Z" fill="#fbbf24"/>
+    <path d="M 256 432 C 100 432 100 256 100 256 C 100 256 100 432 256 432 Z" fill="url(#leaf1)"/>
+    <path d="M 256 432 C 412 432 412 256 412 256 C 412 256 412 432 256 432 Z" fill="url(#leaf2)"/>
+    <circle cx="256" cy="400" r="24" fill="currentColor"/>
+    <path d="M 256 400 L 256 200" stroke="currentColor" strokeWidth="24" strokeLinecap="round"/>
+    <circle cx="256" cy="180" r="32" fill="currentColor"/>
+  </svg>
+);
+
 function App() {
   const [prompt, setPrompt] = useState('');
   
@@ -80,7 +102,8 @@ function App() {
   const fetchModelResponse = async (model, promptText) => {
     const startTime = performance.now();
     try {
-      const res = await fetch(`http://localhost:8080/api/${model}/ask`, {
+      const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+      const res = await fetch(`${baseUrl}/api/${model}/ask`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: promptText })
@@ -158,7 +181,7 @@ function App() {
       <header className="header">
         <div className="header-left">
           <div className="logo-container">
-            <img src="/logo.svg" alt="Logo" className="logo-img" />
+            <Logo />
             <div className="logo-text">
               <h1>Spring AI <span>Studio</span></h1>
             </div>
