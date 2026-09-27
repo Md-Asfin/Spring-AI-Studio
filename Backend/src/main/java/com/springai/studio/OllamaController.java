@@ -33,10 +33,11 @@ public class OllamaController {
             if (chatResponse != null && chatResponse.getMetadata() != null) {
                 log.info("Model used: {}", chatResponse.getMetadata().getModel());
             }
-            
-            String response = chatResponse != null && chatResponse.getResult() != null && chatResponse.getResult().getOutput() != null
-                    ? chatResponse.getResult().getOutput().getText()
-                    : "Empty response";
+
+            String response = chatResponse != null && chatResponse.getResult() != null
+                    && chatResponse.getResult().getOutput() != null
+                            ? chatResponse.getResult().getOutput().getText()
+                            : "Empty response";
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("Error calling Ollama", e);

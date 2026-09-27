@@ -48,7 +48,7 @@ Spring-AI-Studio/
 │   └── pom.xml              # Maven dependencies
 ├── Frontend/                # React Application
 │   ├── src/                 # React components (App.jsx) and assets
-│   ├── public/              # Static assets (logo.svg, favicon.svg)
+│   ├── public/              # Static assets (branding/spring-ai-studio-logo.jpg, favicon.jpg)
 │   ├── package.json         # Node dependencies
 │   └── .env.example         # Frontend environment configuration
 └── README.md
