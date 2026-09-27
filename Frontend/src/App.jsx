@@ -8,32 +8,29 @@ const EXAMPLES = [
   "Explain Spring AI ChatClient"
 ];
 
-const Logo = () => (
-  <svg xmlns="http://www.w3.org/2001/svg" viewBox="0 0 512 512" width="32" height="32" className="logo-img">
+// The brand logo component directly in React to guarantee rendering
+const BrandLogo = ({ className = "logo-icon" }) => (
+  <svg xmlns="http://www.w3.org/2001/svg" viewBox="0 0 512 512" className={className}>
     <defs>
-      <linearGradient id="leaf1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <linearGradient id="leafBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#38bdf8"/>
+        <stop offset="100%" stopColor="#3b82f6"/>
+      </linearGradient>
+      <linearGradient id="leafGreen" x1="0%" y1="100%" x2="100%" y2="0%">
         <stop offset="0%" stopColor="#34d399"/>
         <stop offset="100%" stopColor="#10b981"/>
       </linearGradient>
-      <linearGradient id="leaf2" x1="0%" y1="100%" x2="100%" y2="0%">
-        <stop offset="0%" stopColor="#60a5fa"/>
-        <stop offset="100%" stopColor="#3b82f6"/>
-      </linearGradient>
     </defs>
-    <path d="M 360 80 Q 360 120 400 120 Q 360 120 360 160 Q 360 120 320 120 Q 360 120 360 80 Z" fill="#fbbf24"/>
-    <path d="M 420 160 Q 420 180 440 180 Q 420 180 400 180 Q 420 180 420 160 Z" fill="#fbbf24"/>
-    <path d="M 256 432 C 100 432 100 256 100 256 C 100 256 100 432 256 432 Z" fill="url(#leaf1)"/>
-    <path d="M 256 432 C 412 432 412 256 412 256 C 412 256 412 432 256 432 Z" fill="url(#leaf2)"/>
-    <circle cx="256" cy="400" r="24" fill="currentColor"/>
-    <path d="M 256 400 L 256 200" stroke="currentColor" strokeWidth="24" strokeLinecap="round"/>
-    <circle cx="256" cy="180" r="32" fill="currentColor"/>
+    <path d="M 256 420 C 60 420 60 160 60 160 C 60 160 60 420 256 420 Z" fill="url(#leafBlue)"/>
+    <path d="M 256 420 C 452 420 452 160 452 160 C 452 160 452 420 256 420 Z" fill="url(#leafGreen)"/>
+    <path d="M 256 120 Q 256 160 296 160 Q 256 160 256 200 Q 256 160 216 160 Q 256 160 256 120 Z" fill="#60a5fa"/>
+    <path d="M 180 80 Q 180 100 200 100 Q 180 100 180 120 Q 180 100 160 100 Q 180 100 180 80 Z" fill="#34d399"/>
+    <path d="M 330 60 Q 330 80 350 80 Q 330 80 310 80 Q 330 80 330 60 Z" fill="#38bdf8"/>
   </svg>
 );
 
 function App() {
   const [prompt, setPrompt] = useState('');
-  
-  // Theme state with localStorage persistence
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light';
   });
@@ -48,11 +45,13 @@ function App() {
     { 
       id: 'openai', 
       provider: 'OpenAI',
-      name: 'GPT-4o', 
+      name: 'GPT-4o',
+      desc: 'Advanced reasoning and creativity',
       type: 'Cloud',
-      color: 'var(--accent-green)',
+      color: '#10a37f',
+      bgLight: '#ecfdf5',
       icon: (
-        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none">
+        <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="1.5" fill="none">
           <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
           <path d="M12 6a6 6 0 1 0 6 6 6 6 0 0 0-6-6zm0 10a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"></path>
         </svg>
@@ -61,11 +60,13 @@ function App() {
     { 
       id: 'anthropic', 
       provider: 'Anthropic',
-      name: 'Claude', 
+      name: 'Claude',
+      desc: 'Thoughtful, safe and helpful',
       type: 'Cloud',
-      color: 'var(--accent-orange)',
+      color: '#d97757',
+      bgLight: '#fff7ed',
       icon: (
-        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none">
+        <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="2" fill="none">
           <path d="M4 4h16v16H4z"></path>
           <path d="M9 9h6v6H9z"></path>
         </svg>
@@ -74,17 +75,17 @@ function App() {
     { 
       id: 'ollama', 
       provider: 'Ollama',
-      name: 'DeepSeek', 
+      name: 'DeepSeek',
+      desc: 'Run locally with Ollama',
       type: 'Local',
-      color: 'var(--accent-blue)',
+      color: '#6366f1',
+      bgLight: '#eef2ff',
       icon: (
-        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none">
-          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-          <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
-          <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
-          <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
-          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2c2.76 0 5 2.24 5 5v2h3a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h3V7c0-2.76 2.24-5 5-5z"></path>
+          <circle cx="9" cy="14" r="1"></circle>
+          <circle cx="15" cy="14" r="1"></circle>
+          <path d="M10 18h4"></path>
         </svg>
       )
     }
@@ -122,14 +123,17 @@ function App() {
       const endTime = performance.now();
       const timeSec = ((endTime - startTime) / 1000).toFixed(2);
       
-      let errMsg = "This provider could not generate a response. Please check your API configuration.";
+      let errMsg = "Provider unavailable.";
+      let reqMsg = "API credentials are not configured.";
+      
       if (error.message.includes("401") || error.message.includes("Incorrect API key")) {
-        errMsg = "API credentials have not been configured yet.\n\nConfigure:\nSPRING_AI_" + model.toUpperCase() + "_API_KEY";
+        reqMsg = `Set SPRING_AI_${model.toUpperCase()}_API_KEY`;
       } else if (model === 'ollama') {
-        errMsg = "Start Ollama and make sure the configured model is installed.";
+        errMsg = "Requires Ollama";
+        reqMsg = "Run on http://localhost:11434";
       }
       
-      return { data: null, time: timeSec, error: errMsg };
+      return { data: null, time: timeSec, error: errMsg, reqMsg };
     }
   };
 
@@ -138,7 +142,7 @@ function App() {
     
     const newResponses = {};
     models.forEach(m => {
-      newResponses[m.id] = { status: 'loading', data: null, error: null, time: 0 };
+      newResponses[m.id] = { status: 'loading', data: null, error: null, reqMsg: null, time: 0 };
     });
     setResponses(newResponses);
     
@@ -150,7 +154,8 @@ function App() {
             [model.id]: { 
               status: res.error ? 'error' : 'success', 
               data: res.data, 
-              error: res.error, 
+              error: res.error,
+              reqMsg: res.reqMsg,
               time: res.time 
             }
           }));
@@ -158,203 +163,165 @@ function App() {
     });
   }, [prompt]);
 
-  const copyToClipboard = (text) => {
-    if (!text) return;
-    navigator.clipboard.writeText(text);
-  };
-
-  const isLoading = Object.values(responses).some(r => r.status === 'loading');
-  const hasResults = Object.values(responses).some(r => r.status === 'success' || r.status === 'error');
-  const successfulModels = Object.entries(responses).filter(([_, r]) => r.status === 'success');
-  
-  const fastestModel = successfulModels.length > 0 
-    ? successfulModels.reduce((min, curr) => parseFloat(curr[1].time) < parseFloat(min[1].time) ? curr : min)
-    : null;
-
-  const averageTime = successfulModels.length > 0
-    ? (successfulModels.reduce((sum, curr) => sum + parseFloat(curr[1].time), 0) / successfulModels.length).toFixed(2)
-    : 0;
-
   return (
     <div className="app-container">
       {/* HEADER */}
-      <header className="header">
-        <div className="header-left">
-          <div className="logo-container">
-            <Logo />
-            <div className="logo-text">
-              <h1>Spring AI <span>Studio</span></h1>
+      <header className="navbar">
+        <div className="nav-container">
+          <div className="brand">
+            <BrandLogo className="brand-logo" />
+            <div className="brand-wordmark">
+              <span className="brand-text-dark">Spring AI</span> <span className="brand-text-accent">Studio</span>
             </div>
           </div>
-          <nav className="main-nav">
-            <a href="#" className="active">Home</a>
-            <a href="#compare">Compare</a>
-            <a href="https://spring.io/projects/spring-ai" target="_blank" rel="noreferrer">Docs</a>
+          
+          <nav className="nav-links">
+            <a href="#" className="active">
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+              Home
+            </a>
+            <a href="#compare">
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+              Compare
+            </a>
+            <a href="https://spring.io/projects/spring-ai" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+              Docs
+            </a>
+            <a href="https://github.com/Mohammad-Asfin/Spring-AI-Studio" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              About
+            </a>
           </nav>
-        </div>
-        <div className="header-right">
-          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-            {theme === 'light' ? (
-              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            ) : (
-              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-            )}
-          </button>
+          
+          <div className="nav-actions">
+            <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+              {theme === 'light' ? (
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+              ) : (
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+              )}
+            </button>
+          </div>
         </div>
       </header>
 
       <main className="main-content">
         {/* HERO SECTION */}
         <section className="hero">
-          <h2>Compare and evaluate multiple LLM models side-by-side</h2>
+          <BrandLogo className="hero-logo" />
+          <h1 className="hero-title">
+            <span className="text-dark">Spring AI</span> <span className="text-accent">Studio</span>
+          </h1>
+          <p className="hero-subtitle">Compare and evaluate multiple LLM models side-by-side</p>
         </section>
 
         {/* PROMPT WORKSPACE */}
-        <section className="prompt-workspace" id="compare">
-          <div className="prompt-card">
-            <div className="prompt-input-wrapper">
-              <textarea
-                placeholder="Type your prompt here to challenge the AI models..."
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                disabled={isLoading}
-                className="prompt-textarea"
-                aria-label="Prompt input"
-              />
-            </div>
+        <section className="prompt-section" id="compare">
+          <div className="prompt-box">
+            <textarea
+              className="prompt-textarea"
+              placeholder="Type your prompt here to challenge the AI models..."
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              disabled={Object.values(responses).some(r => r.status === 'loading')}
+            />
             
             <div className="prompt-footer">
-              <div className="examples-section">
-                <span className="examples-label">Try an example:</span>
+              <div className="prompt-examples">
+                <span className="examples-title">Try an example:</span>
                 <div className="examples-list">
                   {EXAMPLES.map((ex, i) => (
-                    <button 
-                      key={i} 
-                      className="example-btn" 
-                      onClick={() => setPrompt(ex)}
-                      disabled={isLoading}
-                    >
+                    <button key={i} className="example-chip" onClick={() => setPrompt(ex)}>
                       {ex}
                     </button>
                   ))}
                 </div>
               </div>
-
-              <div className="prompt-actions">
-                <button 
-                  className="btn btn-secondary" 
-                  onClick={() => setPrompt('')}
-                  disabled={isLoading || !prompt}
-                >
-                  Clear
-                </button>
-                <button 
-                  className="btn btn-primary" 
-                  onClick={handleSubmit}
-                  disabled={isLoading || !prompt.trim()}
-                >
-                  {isLoading ? 'Comparing...' : 'Compare Models →'}
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* COMPARISON SUMMARY */}
-        <section className="summary-section">
-          <div className="summary-grid">
-            <div className="summary-item">
-              <span className="summary-label">Models Tested</span>
-              <span className="summary-value">{models.length}</span>
-            </div>
-            <div className="summary-item">
-              <span className="summary-label">Successful</span>
-              <span className="summary-value">
-                {hasResults ? `${successfulModels.length} / ${models.length}` : '—'}
-              </span>
-            </div>
-            <div className="summary-item">
-              <span className="summary-label">Fastest Model</span>
-              <span className="summary-value fastest" style={{color: fastestModel ? models.find(m=>m.id===fastestModel[0]).color : 'inherit'}}>
-                {fastestModel ? models.find(m=>m.id===fastestModel[0]).provider : '—'}
-              </span>
-            </div>
-            <div className="summary-item">
-              <span className="summary-label">Average Response</span>
-              <span className="summary-value">{averageTime > 0 ? `${averageTime}s` : '—'}</span>
+              <button 
+                className="submit-btn" 
+                onClick={handleSubmit}
+                disabled={!prompt.trim() || Object.values(responses).some(r => r.status === 'loading')}
+              >
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                Compare Models
+              </button>
             </div>
           </div>
         </section>
 
         {/* MODEL CARDS */}
-        <section className="models-grid">
+        <section className="cards-section">
           {models.map(model => {
             const res = responses[model.id];
+            const hasStarted = res.status !== 'idle';
             
             return (
-              <div key={model.id} className="model-card" style={{ '--accent': model.color }}>
+              <div key={model.id} className="model-card" style={{ '--card-color': model.color }}>
                 
+                {/* Header matching Screenshot 2 style */}
                 <div className="card-header">
-                  <div className="card-title-group">
-                    <div className="card-icon" style={{ color: model.color }}>
-                      {model.icon}
-                    </div>
-                    <div>
-                      <h3 className="provider-name">{model.provider}</h3>
-                      <span className="model-name">{model.name}</span>
-                    </div>
+                  <div className="card-icon" style={{ backgroundColor: theme === 'light' ? model.bgLight : '#1e293b', color: model.color }}>
+                    {model.icon}
                   </div>
-                  <div className="card-tags">
-                    <span className="tag type-tag">{model.type}</span>
+                  <div className="card-tag" style={{ color: model.color, backgroundColor: theme === 'light' ? model.bgLight : '#1e293b' }}>
+                    {model.type}
                   </div>
-                </div>
-
-                <div className="card-status-bar">
-                  {res.status === 'idle' && <span className="status status-ready">● Ready</span>}
-                  {res.status === 'loading' && <span className="status status-loading">● Loading...</span>}
-                  {res.status === 'success' && <span className="status status-success">✓ Completed</span>}
-                  {res.status === 'error' && <span className="status status-error">⚠ Unavailable</span>}
                 </div>
                 
+                <div className="card-title-area">
+                  <h3>{model.provider} ({model.name})</h3>
+                  <p>{model.desc}</p>
+                </div>
+                
+                {/* Body Content */}
                 <div className="card-body">
-                  {res.status === 'idle' && (
-                    <div className="empty-state">Response will appear here...</div>
+                  {!hasStarted && (
+                    <div className="error-box" style={{ backgroundColor: theme === 'light' ? model.bgLight : '#1e293b' }}>
+                      <div className="error-title">
+                        <span className="dot" style={{ backgroundColor: model.color }}></span>
+                        {model.type === 'Local' ? 'Requires Ollama' : 'Requires API key'}
+                      </div>
+                      <div className="error-desc">
+                        {model.type === 'Local' ? 'Run on http://localhost:11434' : `Set SPRING_AI_${model.provider.toUpperCase()}_API_KEY`}
+                      </div>
+                    </div>
                   )}
 
                   {res.status === 'loading' && (
                     <div className="loading-state">
-                      <div className="dot-pulse"></div>
+                      <div className="pulse-dot" style={{ backgroundColor: model.color }}></div>
+                      <span>Generating...</span>
+                    </div>
+                  )}
+
+                  {res.status === 'success' && (
+                    <div className="response-content">
+                      {res.data}
                     </div>
                   )}
                   
-                  {res.status === 'success' && (
-                    <div className="response-content">{res.data}</div>
-                  )}
-
                   {res.status === 'error' && (
-                    <div className="error-content">
-                      <h4>Provider unavailable</h4>
-                      <p>{res.error}</p>
+                    <div className="error-box error-box-active">
+                      <div className="error-title">
+                        <span className="dot" style={{ backgroundColor: '#ef4444' }}></span>
+                        {res.error}
+                      </div>
+                      <div className="error-desc">{res.reqMsg}</div>
                     </div>
                   )}
                 </div>
 
-                <div className="card-footer">
-                  <div className="response-time">
-                    Response time: {res.time > 0 ? `${res.time}s` : '—'}
+                {/* Footer with Timing & Copy */}
+                {res.status === 'success' && (
+                  <div className="card-footer">
+                    <span className="timing">{res.time}s</span>
+                    <button className="copy-btn" onClick={() => navigator.clipboard.writeText(res.data)}>
+                      <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                      Copy
+                    </button>
                   </div>
-                  <button 
-                    className="copy-btn" 
-                    onClick={() => copyToClipboard(res.data)}
-                    disabled={res.status !== 'success'}
-                    aria-label="Copy response"
-                    title="Copy response"
-                  >
-                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    Copy
-                  </button>
-                </div>
-
+                )}
               </div>
             );
           })}
@@ -364,14 +331,15 @@ function App() {
       {/* FOOTER */}
       <footer className="footer">
         <div className="footer-content">
-          <div className="footer-brand">
-            <span className="footer-logo">Spring AI Studio</span>
+          <div className="footer-left">
+            <span>Spring AI Studio</span>
+            <span className="dot-sep">•</span>
+            <span>Built with Spring Boot & React</span>
           </div>
-          <div className="footer-links">
-            <span className="footer-text">Built with Spring Boot • Spring AI • React</span>
-            <a href="https://github.com/Mohammad-Asfin/Spring-AI-Studio" target="_blank" rel="noopener noreferrer" className="footer-github">
-              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-              GitHub Repository
+          <div className="footer-right">
+            <a href="https://github.com/Mohammad-Asfin/Spring-AI-Studio" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              Open Source
             </a>
           </div>
         </div>
