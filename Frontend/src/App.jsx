@@ -8,27 +8,6 @@ const EXAMPLES = [
   "Explain Spring AI ChatClient"
 ];
 
-// The brand logo component directly in React to guarantee rendering
-const BrandLogo = ({ className = "logo-icon" }) => (
-  <svg xmlns="http://www.w3.org/2001/svg" viewBox="0 0 512 512" className={className}>
-    <defs>
-      <linearGradient id="leafBlue" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#38bdf8"/>
-        <stop offset="100%" stopColor="#3b82f6"/>
-      </linearGradient>
-      <linearGradient id="leafGreen" x1="0%" y1="100%" x2="100%" y2="0%">
-        <stop offset="0%" stopColor="#34d399"/>
-        <stop offset="100%" stopColor="#10b981"/>
-      </linearGradient>
-    </defs>
-    <path d="M 256 420 C 60 420 60 160 60 160 C 60 160 60 420 256 420 Z" fill="url(#leafBlue)"/>
-    <path d="M 256 420 C 452 420 452 160 452 160 C 452 160 452 420 256 420 Z" fill="url(#leafGreen)"/>
-    <path d="M 256 120 Q 256 160 296 160 Q 256 160 256 200 Q 256 160 216 160 Q 256 160 256 120 Z" fill="#60a5fa"/>
-    <path d="M 180 80 Q 180 100 200 100 Q 180 100 180 120 Q 180 100 160 100 Q 180 100 180 80 Z" fill="#34d399"/>
-    <path d="M 330 60 Q 330 80 350 80 Q 330 80 310 80 Q 330 80 330 60 Z" fill="#38bdf8"/>
-  </svg>
-);
-
 function App() {
   const [prompt, setPrompt] = useState('');
   const [theme, setTheme] = useState(() => {
@@ -169,7 +148,7 @@ function App() {
       <header className="navbar">
         <div className="nav-container">
           <div className="brand">
-            <BrandLogo className="brand-logo" />
+            <img src="/logo.svg" className="brand-logo" alt="Spring AI Studio Logo" />
             <div className="brand-wordmark">
               <span className="brand-text-dark">Spring AI</span> <span className="brand-text-accent">Studio</span>
             </div>
@@ -209,7 +188,7 @@ function App() {
       <main className="main-content">
         {/* HERO SECTION */}
         <section className="hero">
-          <BrandLogo className="hero-logo" />
+          <img src="/logo.svg" className="hero-logo" alt="Spring AI Studio Logo" />
           <h1 className="hero-title">
             <span className="text-dark">Spring AI</span> <span className="text-accent">Studio</span>
           </h1>
