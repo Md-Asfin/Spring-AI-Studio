@@ -75,8 +75,10 @@ body {
   gap: 0.75rem;
 }
 .brand-logo {
-  width: 32px;
-  height: 32px;
+  height: 44px;
+  width: 44px;
+  object-fit: contain;
+  display: block;
 }
 .brand-wordmark {
   font-size: 1.25rem;
@@ -87,7 +89,9 @@ body {
   color: var(--text-main);
 }
 .brand-text-accent {
-  color: #3b82f6;
+  background: linear-gradient(135deg, #0284c7 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .nav-links {
@@ -142,8 +146,9 @@ body {
   margin-bottom: 2.5rem;
 }
 .hero-logo {
-  width: 52px;
-  height: 52px;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
   margin-bottom: 1rem;
 }
 .hero-title {
@@ -153,7 +158,11 @@ body {
   margin-bottom: 0.5rem;
 }
 .hero-title .text-dark { color: var(--text-main); }
-.hero-title .text-accent { color: #3b82f6; }
+.hero-title .text-accent {
+  background: linear-gradient(135deg, #0284c7 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .hero-subtitle {
   font-size: 1.1rem;
@@ -413,6 +422,10 @@ body {
 }
 
 @media (max-width: 900px) {
+  .brand-logo {
+    height: 36px;
+    width: 36px;
+  }
   .cards-section {
     grid-template-columns: 1fr;
   }

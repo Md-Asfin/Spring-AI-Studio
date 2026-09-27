@@ -1,13 +1,21 @@
-# 🚀 Spring AI Studio
+<p align="center">
+  <img src="Frontend/public/branding/spring-ai-studio-wordmark.png" alt="Spring AI Studio" width="460" />
+</p>
 
-> **A professional LLM Comparison Workspace built with Spring Boot, Spring AI, and React.**
-> Compare and evaluate multiple Large Language Models side-by-side using the same prompt.
+<h1 align="center">Spring AI Studio</h1>
 
-[![Java](https://img.shields.io/badge/Java-21-orange.svg?logo=java)](https://dev.java/)
-[![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4.3-green.svg?logo=springboot)](https://spring.io/projects/spring-boot)
-[![Spring AI](https://img.shields.io/badge/Spring_AI-1.0.0--M6-blue.svg?logo=spring)](https://spring.io/projects/spring-ai)
-[![React](https://img.shields.io/badge/React-19-blue.svg?logo=react)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-6.2-yellow.svg?logo=vite)](https://vitejs.dev/)
+<p align="center">
+  <strong>A professional LLM Comparison Workspace built with Spring Boot, Spring AI, and React.</strong><br>
+  Compare and evaluate multiple Large Language Models side-by-side using the same prompt.
+</p>
+
+<p align="center">
+  <a href="https://dev.java/"><img src="https://img.shields.io/badge/Java-21-orange.svg?logo=java" alt="Java"></a>
+  <a href="https://spring.io/projects/spring-boot"><img src="https://img.shields.io/badge/Spring_Boot-3.4.3-green.svg?logo=springboot" alt="Spring Boot"></a>
+  <a href="https://spring.io/projects/spring-ai"><img src="https://img.shields.io/badge/Spring_AI-1.0.0--M6-blue.svg?logo=spring" alt="Spring AI"></a>
+  <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-19-blue.svg?logo=react" alt="React"></a>
+  <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-6.2-yellow.svg?logo=vite" alt="Vite"></a>
+</p>
 
 ---
 
@@ -48,7 +56,7 @@ Spring-AI-Studio/
 │   └── pom.xml              # Maven dependencies
 ├── Frontend/                # React Application
 │   ├── src/                 # React components (App.jsx) and assets
-│   ├── public/              # Static assets (branding/spring-ai-studio-logo.jpg, favicon.jpg)
+│   ├── public/              # Static assets (branding/spring-ai-studio-logo.png, favicon.png)
 │   ├── package.json         # Node dependencies
 │   └── .env.example         # Frontend environment configuration
 └── README.md

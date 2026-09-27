@@ -148,7 +148,7 @@ function App() {
       <header className="navbar">
         <div className="nav-container">
           <div className="brand">
-            <img src="/branding/spring-ai-studio-logo.jpg" className="brand-logo" alt="Spring AI Studio Logo" />
+            <img src="/branding/spring-ai-studio-logo.png" className="brand-logo" alt="Spring AI Studio Logo" />
             <div className="brand-wordmark">
               <span className="brand-text-dark">Spring AI</span> <span className="brand-text-accent">Studio</span>
             </div>
@@ -188,7 +188,7 @@ function App() {
       <main className="main-content">
         {/* HERO SECTION */}
         <section className="hero">
-          <img src="/branding/spring-ai-studio-logo.jpg" className="hero-logo" alt="Spring AI Studio Logo" />
+          <img src="/branding/spring-ai-studio-logo.png" className="hero-logo" alt="Spring AI Studio Logo" />
           <h1 className="hero-title">
             <span className="text-dark">Spring AI</span> <span className="text-accent">Studio</span>
           </h1>
