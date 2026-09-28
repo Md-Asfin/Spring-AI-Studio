@@ -1,43 +1,50 @@
-<p align="center">
-  <img src="Frontend/public/branding/spring-ai-studio-wordmark.png" alt="Spring AI Studio Wordmark" width="480" />
-</p>
+<div align="center">
 
-<h1 align="center">🤖 Spring AI Studio</h1>
+# 🤖 Spring AI Studio
 
-<p align="center">
-  <strong>A full-stack LLM comparison and benchmarking workspace built with Spring Boot, Spring AI, and React.</strong><br>
-  Broadcast a single prompt to multiple frontier and local AI models concurrently, evaluate side-by-side outputs, and measure real-time latency and first-response performance.
-</p>
+**A full-stack LLM comparison and benchmarking workspace built with Spring Boot, Spring AI, and React.**<br>
+Broadcast a single prompt to multiple frontier and local AI models concurrently, evaluate side-by-side outputs, and measure real-time latency and first-response performance.
 
-<p align="center">
-  <a href="https://spring-ai-studio-psi.vercel.app/"><img src="https://img.shields.io/badge/Live%20Frontend-Vercel-000000.svg?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"></a>
-  <a href="https://github.com/Mohammad-Asfin/Spring-AI-Studio"><img src="https://img.shields.io/badge/GitHub-Repository-181717.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Repo"></a>
-</p>
+<br/>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Java-21-ED8B00.svg?style=flat-square&logo=openjdk&logoColor=white" alt="Java 21">
-  <img src="https://img.shields.io/badge/Spring%20Boot-3.4.3-6DB33F.svg?style=flat-square&logo=springboot&logoColor=white" alt="Spring Boot 3.4.3">
-  <img src="https://img.shields.io/badge/Spring%20AI-1.0.0--M6-6DB33F.svg?style=flat-square&logo=spring&logoColor=white" alt="Spring AI 1.0.0-M6">
-  <img src="https://img.shields.io/badge/React-19.0.0-61DAFB.svg?style=flat-square&logo=react&logoColor=black" alt="React 19">
-  <img src="https://img.shields.io/badge/Vite-6.2.0-646CFF.svg?style=flat-square&logo=vite&logoColor=white" alt="Vite 6.2">
-  <img src="https://img.shields.io/badge/OpenAI-GPT--4o-412991.svg?style=flat-square&logo=openai&logoColor=white" alt="OpenAI GPT-4o">
-  <img src="https://img.shields.io/badge/Anthropic-Claude-D97757.svg?style=flat-square&logo=anthropic&logoColor=white" alt="Anthropic Claude">
-  <img src="https://img.shields.io/badge/Ollama-DeepSeek-6366F1.svg?style=flat-square&logo=ollama&logoColor=white" alt="Ollama DeepSeek">
-  <img src="https://img.shields.io/badge/License-Open%20Source-blue.svg?style=flat-square" alt="License">
-</p>
+[![Live Frontend](https://img.shields.io/badge/LIVE%20FRONTEND-VERCEL-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://spring-ai-studio-psi.vercel.app/)
+&nbsp;&nbsp;
+[![GitHub Repository](https://img.shields.io/badge/GITHUB-REPOSITORY-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Mohammad-Asfin/Spring-AI-Studio)
+
+<br/>
+
+[![Java 21](https://img.shields.io/badge/Java-21-ED8B00?style=flat&logo=openjdk&logoColor=white)](https://dev.java/)
+[![Spring Boot 3.4.3](https://img.shields.io/badge/Spring_Boot-3.4.3-6DB33F?style=flat&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Spring AI 1.0.0-M6](https://img.shields.io/badge/Spring_AI-1.0.0--M6-6DB33F?style=flat&logo=spring&logoColor=white)](https://docs.spring.io/spring-ai/reference/)
+[![React 19.0.0](https://img.shields.io/badge/React-19.0.0-20232A?style=flat&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![Vite 6.2.0](https://img.shields.io/badge/Vite-6.2.0-646CFF?style=flat&logo=vite&logoColor=white)](https://vite.dev/)
+[![OpenAI GPT-4o](https://img.shields.io/badge/OpenAI-GPT--4o-412991?style=flat&logo=openai&logoColor=white)](https://openai.com/)
+[![Anthropic Claude](https://img.shields.io/badge/Anthropic-Claude-D97757?style=flat&logo=anthropic&logoColor=white)](https://www.anthropic.com/)
+<br/>
+[![Ollama DeepSeek](https://img.shields.io/badge/Ollama-DeepSeek-6366F1?style=flat&logo=ollama&logoColor=white)](https://ollama.com/)
+[![License Open Source](https://img.shields.io/badge/License-Open%20Source-0284C7?style=flat)](https://github.com/Mohammad-Asfin/Spring-AI-Studio)
+
+</div>
+
+---
+
+## 🚀 Live Demo & Source Code
+
+- **🌐 Live Frontend Demo**: [https://spring-ai-studio-psi.vercel.app/](https://spring-ai-studio-psi.vercel.app/)
+- **📦 GitHub Repository**: [https://github.com/Mohammad-Asfin/Spring-AI-Studio](https://github.com/Mohammad-Asfin/Spring-AI-Studio)
 
 ---
 
 ## 📑 Table of Contents
 
 - [🎯 Project Overview](#-project-overview)
-- [✨ Features](#-features)
+- [✨ Key Features](#-key-features)
 - [🧠 Why Spring AI?](#-why-spring-ai)
 - [🏗️ System Architecture](#️-system-architecture)
-- [🔄 Request / Response Lifecycle](#-request--response-lifecycle)
-- [⚡ Parallel LLM Execution & Latency Dynamics](#-parallel-llm-execution--latency-dynamics)
+- [🔄 Request / Response Flow](#-request--response-flow)
+- [⚡ Parallel LLM Execution](#-parallel-llm-execution)
 - [🏁 First Response Detection](#-first-response-detection)
-- [📊 LLM Benchmarking & Telemetry](#-llm-benchmarking--telemetry)
+- [📊 LLM Benchmarking & Latency Tracking](#-llm-benchmarking--latency-tracking)
 - [📂 Project Structure](#-project-structure)
 - [☕ Backend Architecture](#-backend-architecture)
 - [🎨 Frontend Architecture](#-frontend-architecture)
@@ -47,41 +54,40 @@
 - [💻 Local Development Guide](#-local-development-guide)
 - [🤖 AI Provider Setup](#-ai-provider-setup)
 - [🚀 Backend Deployment Guide](#-backend-deployment-guide)
-- [☁️ Frontend Vercel Deployment](#️-frontend-vercel-deployment)
+- [☁️ Vercel Frontend Deployment](#️-vercel-frontend-deployment)
 - [🌐 End-to-End Production Wiring](#-end-to-end-production-wiring)
 - [🔒 Security & Best Practices](#-security--best-practices)
 - [🧪 Testing & Verification](#-testing--verification)
 - [🐛 Troubleshooting Guide](#-troubleshooting-guide)
 - [🧩 Common Use Cases & Prompts](#-common-use-cases--prompts)
 - [📈 Performance Considerations](#-performance-considerations)
+- [📸 Screenshots](#-screenshots)
 - [🗺️ Future Roadmap](#️-future-roadmap)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
-- [🔗 Important Links](#-important-links)
+- [🔗 Important Documentation Links](#-important-documentation-links)
 
 ---
 
 ## 🎯 Project Overview
 
 ### What is Spring AI Studio?
-**Spring AI Studio** is a full-stack, developer-focused LLM comparison workspace and benchmarking platform. It enables engineers, AI practitioners, and architects to submit a **single prompt** and simultaneously compare outputs from frontier cloud LLMs and locally hosted open-weight models:
+**Spring AI Studio** is a full-stack, developer-oriented LLM evaluation workspace and benchmarking suite. It allows users to enter **one single prompt** and simultaneously query multiple frontier cloud models and local self-hosted open-weight models:
 1. **OpenAI** (`GPT-4o` cloud model)
 2. **Anthropic** (`Claude` cloud model)
 3. **Ollama / DeepSeek** (`deepseek-r1:14b` local inference engine)
 
 ### Why Does This Project Exist?
-Modern generative AI development requires evaluating trade-offs between model intelligence, reasoning style, response latency, operational cost, and data privacy:
-- **Cloud vs. Local Trade-Offs**: Commercial APIs provide cutting-edge reasoning but introduce latency and token pricing; local self-hosted models offer zero API cost and strict data privacy but rely on local GPU/CPU compute.
-- **Provider Fragmentation**: Every AI provider traditionally requires proprietary client SDKs, unique request formatting, and custom error handling.
-- **Subjective vs. Empirical Benchmarking**: Manually querying multiple web portals makes side-by-side comparison tedious and unscientific.
+When selecting Large Language Models for applications, engineers face critical architectural and operational trade-offs:
+- **Cloud vs. Local Models**: Commercial cloud APIs offer cutting-edge reasoning but introduce network latency and recurring token costs. In contrast, local models running via Ollama provide zero API fees and complete data privacy, but depend on local hardware compute.
+- **Provider Fragmentation**: Each AI provider traditionally requires proprietary client SDKs, incompatible JSON formats, and disparate error schemes.
+- **Subjective vs. Empirical Evaluation**: Testing prompts manually across multiple web tabs is tedious and subjective. Spring AI Studio provides an empirical side-by-side view with synchronized request dispatch and high-resolution latency measurement.
 
-### The Solution: A Unified Full-Stack Architecture
-Spring AI Studio bridges the frontend user experience with Spring Boot backend services:
-
+### Client-Server Flow:
 ```text
 React 19 (Vite)
        │
-       │ HTTP POST (JSON Payload: { "prompt": "..." })
+       │ HTTP POST (JSON: { "prompt": "..." })
        ▼
 Spring Boot 3.4 REST Controllers
        │
@@ -103,14 +109,14 @@ OpenAI API       Anthropic API          Local Ollama Daemon
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-- **Side-by-Side Multi-LLM Evaluation**: Broadcast one prompt across OpenAI, Anthropic Claude, and local Ollama simultaneously.
+- **Side-by-Side Multi-LLM Comparison**: Broadcast a single prompt across OpenAI GPT-4o, Anthropic Claude, and local Ollama DeepSeek concurrently.
 - **Unified Spring AI Backend**: Clean Spring Boot 3.4 architecture utilizing the official `spring-ai-bom` (`1.0.0-M6`) with zero provider-specific boilerplate in controllers.
-- **Non-Blocking Parallel Client Dispatch**: React dispatches concurrent HTTP requests; slow, queuing, or failing models never block responses from faster providers.
+- **Non-Blocking Parallel Client Dispatch**: React fires concurrent HTTP requests; slow, queuing, or failing models never block responses from faster providers.
 - **Individual Model Lifecycle States**: Every model card independently transitions through `IDLE`, `LOADING` (with provider-themed pulsing animations), `SUCCESS`, and `ERROR` states.
 - **Race-Condition-Safe First Response Winner**: Uses React `useRef` to reliably capture the first successful response (`⚡ First Response`) across concurrent execution streams.
-- **High-Resolution Response Timing**: Browser `performance.now()` measures elapsed time to two decimal places in seconds.
+- **High-Resolution Response Timing**: Browser `performance.now()` measures elapsed execution latency to two decimal places in seconds.
 - **Live Aggregated Benchmark Statistics**: Instant header dashboard displaying:
   - *Models Tested* ($N=3$)
   - *Successful Responses*
@@ -195,8 +201,7 @@ flowchart TD
     Tracker --> UI
 ```
 
-### Architectural Layers Explained
-
+### Architectural Layers Explained:
 1. **Presentation Layer (React 19 + Vite 6.2)**: Handles user interaction, theme switching, prompt validation, concurrent network orchestration, and real-time benchmark calculations.
 2. **API & Routing Layer (Spring Boot Web)**: Exposes stateless REST endpoints mapped under `/api/*`, accepts JSON payloads, and handles HTTP status codes.
 3. **AI Orchestration Layer (Spring AI 1.0.0-M6)**: Uses `ChatClient.create(chatModel)` to inject provider-specific drivers (`OpenAiChatModel`, `AnthropicChatModel`, `OllamaChatModel`) into unified execution pipelines.
@@ -206,9 +211,7 @@ flowchart TD
 
 ---
 
-## 🔄 Request / Response Lifecycle
-
-The following sequence illustrates the complete end-to-end lifecycle of a comparison request:
+## 🔄 Request / Response Flow
 
 ```mermaid
 sequenceDiagram
@@ -249,26 +252,23 @@ sequenceDiagram
     React->>User: Render side-by-side cards with latency metrics and gold winner badge
 ```
 
-### Detailed Step-by-Step Flow:
-1. **User Submission**: The user enters a prompt or clicks an example chip and clicks **Compare Models**.
-2. **Frontend Initialization**:
-   - Resets the `firstModelRef` to `null`.
-   - Transitions all three model cards into the `loading` state.
-   - Captures execution timestamps via `performance.now()`.
-3. **Parallel Dispatch**: The browser fires three independent asynchronous `fetch()` requests without awaiting one before initiating the next.
-4. **Backend Ingestion**: Spring Boot `@RestController` classes receive the JSON payload `{"prompt": "..."}` and validate that the string is non-empty.
-5. **Spring AI Invocation**: The controller invokes `chatClient.prompt(message).call().content()`.
-6. **Inference**: Each provider executes prompt tokenization, inference generation, and returns the response.
-7. **Backend Response**: The controller returns a `200 OK` containing the raw string response, or catches exceptions and returns an HTTP `500` error message.
-8. **Client Telemetry & Resolution**: As each response resolves independently:
-   - Elapsed latency is computed: `((performance.now() - startTime) / 1000).toFixed(2)`.
-   - If the response succeeded and `firstModelRef.current === null`, the current model is permanently recorded as the first responder for this run.
-   - The corresponding model card renders the generated text and latency.
-9. **Benchmark Bar Computation**: Derived metrics (total models, success count, failure count, average time, winner) are calculated and displayed.
+### Complete 12-Step Lifecycle:
+1. **User Input**: User enters a prompt or clicks an example chip.
+2. **Client Validation**: Frontend ensures prompt is non-empty.
+3. **State Initialization**: Frontend sets all 3 model cards to `LOADING`, starts timers, and resets the first-responder tracker.
+4. **Parallel Dispatch**: The browser fires three concurrent asynchronous `fetch()` requests to Spring Boot.
+5. **Controller Processing**: Backend `@RestController` validates the JSON payload `{"prompt": "..."}`.
+6. **ChatClient Call**: Spring AI `ChatClient` delegates the prompt to the respective `ChatModel`.
+7. **Inference Execution**: Cloud APIs or local Ollama process token generation.
+8. **Backend Return**: Spring Boot returns `200 OK` with the plain text response, or `500` on error.
+9. **Latency Capture**: Frontend calculates elapsed time via `((performance.now() - startTime) / 1000).toFixed(2)`.
+10. **Card Transition**: Individual model card transitions from `LOADING` to `SUCCESS` or `ERROR`.
+11. **First-Response Lock**: The first model to resolve successfully locks `firstModelRef` and receives the winner badge.
+12. **Benchmark Aggregation**: Header stats bar recalculates models tested, successful/failed counts, winner, and average latency.
 
 ---
 
-## ⚡ Parallel LLM Execution & Latency Dynamics
+## ⚡ Parallel LLM Execution
 
 Spring AI Studio intentionally dispatches model requests **in parallel** rather than sequentially:
 
@@ -282,12 +282,12 @@ Parallel Execution (Spring AI Studio):
              └──> [ Ollama (3.7s) ]    ──> Resolves in 3.7s ──┘
 ```
 
-### What Affects Model Latency?
-The application measures real runtime latency. Observed times will vary based on:
-- **Network Round-Trip Latency**: Physical geographic distance to cloud provider datacenters.
-- **Provider API Queueing**: Cloud load during high-traffic periods.
-- **Local Compute Hardware**: For Ollama, CPU vs GPU VRAM bandwidth and quantization levels.
-- **Output Token Count**: Longer, more verbose explanations naturally take longer to stream and complete.
+### Latency Factors:
+Application-level response timing depends on:
+- **Network Round-Trip**: Physical distance to cloud datacenters (OpenAI, Anthropic).
+- **Server Load & Queueing**: Cloud provider traffic variations.
+- **Local Compute Power**: Local GPU VRAM bandwidth and quantization speed for Ollama.
+- **Output Token Length**: More verbose explanations require proportionally more generation time.
 
 ---
 
@@ -295,10 +295,9 @@ The application measures real runtime latency. Observed times will vary based on
 
 Determining which model responds first in a concurrent browser environment requires avoiding **React stale state closures** and **race conditions**.
 
-### Implementation Mechanics
-In [Frontend/src/App.jsx](file:///d:/Java%20Full%20Stack/Spring%20AI/Frontend/src/App.jsx):
+### Implementation Mechanics in `App.jsx`:
 ```javascript
-// 1. Ref ensures an immutable synchronous reference across concurrent async callbacks
+// 1. Ref provides synchronous reference across concurrent async callbacks
 const firstModelRef = useRef(null);
 const [firstModel, setFirstModel] = useState(null);
 
@@ -317,14 +316,14 @@ fetchModelResponse(model.id, prompt).then(result => {
 });
 ```
 
-### Core Rules of First-Response Tracking:
-- **Failed Requests Do Not Win**: If a provider fails immediately with a `401 Unauthorized` or network failure, it is ignored by the first-response tracker.
-- **Set Exactly Once**: Once `firstModelRef.current` is set, subsequent successful responses cannot overwrite the winner for that prompt submission.
-- **Visual Distinction**: The winning card receives the gold `.card-first` border styling and the `⚡ First Response` badge.
+### Rules of First-Response Tracking:
+- **Failed Requests Do Not Win**: Immediate errors (e.g. `401 Unauthorized` or connection refused) are ignored.
+- **Single Winner**: Once `firstModelRef.current` is set, subsequent responses cannot overwrite it.
+- **Visual Distinction**: The winning card receives the gold `.card-first` border and `⚡ First Response` badge.
 
 ---
 
-## 📊 LLM Benchmarking & Telemetry
+## 📊 LLM Benchmarking & Latency Tracking
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
@@ -335,13 +334,13 @@ fetchModelResponse(model.id, prompt).then(result => {
 
 The benchmark dashboard derives statistics dynamically from the state of all three model cards:
 
-1. **Models Tested**: Count of registered models in the matrix ($N=3$).
+1. **Models Tested**: Total registered models ($N=3$).
 2. **Successful Models**: Count of cards with `status === 'success'`.
 3. **Failed Models**: Count of cards with `status === 'error'` (hidden if 0).
 4. **First Response**: Provider name associated with `firstModel` state.
 5. **Average Response Time**: Arithmetic mean of response times across **successful responses only**:
    $$\text{Avg Response Time} = \frac{\sum_{i=1}^{k} \text{Latency}_i}{k} \quad (\text{where } k = \text{Successful Models})$$
-   *Note: Failed models are excluded from the average calculation so unconfigured keys or offline daemons do not skew latency metrics.*
+   *Note: Failed models are excluded from the average calculation so missing keys or offline daemons do not distort latency statistics.*
 
 ---
 
@@ -359,7 +358,7 @@ Spring-AI-Studio/
 │   │   │   │   ├── AnthropicController.java      # REST Controller for Anthropic Claude
 │   │   │   │   ├── OllamaController.java         # REST Controller for Ollama / DeepSeek
 │   │   │   │   ├── OpenAIController.java         # REST Controller for OpenAI GPT-4o
-│   │   │   │   └── SpringAiStudioApplication.java# Spring Boot Bootstrap Entry Point
+│   │   │   │   └── SpringAiStudioApplication.java# Spring Boot Main Entry Point
 │   │   │   └── resources/
 │   │   │       └── application.properties       # Port, API key fallbacks, Ollama model config
 │   │   └── test/
@@ -417,69 +416,38 @@ Spring Boot Application Context
         └── Endpoint: POST /api/ollama/ask
 ```
 
-### Controller Responsibilities
-
-#### 1. `OpenAIController.java`
-- **Path**: `Backend/src/main/java/com/springai/studio/OpenAIController.java`
-- **Annotations**: `@RestController`, `@RequestMapping("/api/openai")`, `@CrossOrigin("*")`
-- **Constructor Injection**: Takes `OpenAiChatModel` and creates a local `ChatClient`.
-- **Method**: `POST /api/openai/ask`
-- **Logic**: Validates prompt presence, calls `chatClient.prompt(message).call().content()`, and returns the string response or an error.
-
-#### 2. `AnthropicController.java`
-- **Path**: `Backend/src/main/java/com/springai/studio/AnthropicController.java`
-- **Annotations**: `@RestController`, `@RequestMapping("/api/anthropic")`, `@CrossOrigin("*")`
-- **Constructor Injection**: Takes `AnthropicChatModel` and creates a local `ChatClient`.
-- **Method**: `POST /api/anthropic/ask`
-- **Logic**: Handles prompt execution for Claude and returns response text.
-
-#### 3. `OllamaController.java`
-- **Path**: `Backend/src/main/java/com/springai/studio/OllamaController.java`
-- **Annotations**: `@RestController`, `@RequestMapping("/api/ollama")`, `@CrossOrigin("*")`
-- **Constructor Injection**: Takes `OllamaChatModel` and creates a local `ChatClient`.
-- **Method**: `POST /api/ollama/ask`
-- **Logic**: Dispatches prompt to local Ollama daemon, logs model metadata via SLF4J, extracts generated text from `chatResponse.getResult().getOutput().getText()`, and handles connection errors.
+### Controller Responsibilities:
+- **`OpenAIController.java`**: Maps `POST /api/openai/ask`, validates payload, calls `ChatClient`, and returns OpenAI GPT-4o output.
+- **`AnthropicController.java`**: Maps `POST /api/anthropic/ask`, validates payload, calls `ChatClient`, and returns Anthropic Claude output.
+- **`OllamaController.java`**: Maps `POST /api/ollama/ask`, logs model metadata, extracts text from `ChatResponse`, and returns DeepSeek output.
 
 ---
 
 ## 🎨 Frontend Architecture
 
-The frontend is a lightweight Single-Page Application (SPA) built with React 19 and Vite.
+The frontend is a modern SPA built with React 19 and Vite 6.2:
 
-### Key Components & State Structure
-
-- **`prompt` (`string`)**: Controlled state bound to the main textarea.
-- **`theme` (`'light' | 'dark'`)**: Synchronized with `document.documentElement[data-theme]` and persisted in `localStorage`.
-- **`responses` (`object`)**: State map holding each model's progress:
-  ```json
-  {
-    "status": "idle | loading | success | error",
-    "data": "Generated text response...",
-    "error": "Error message if failed",
-    "reqMsg": "Diagnostic hint if failed",
-    "time": "1.82"
-  }
-  ```
-- **`firstModelRef` (`useRef`)**: Immediate synchronous lock preventing race conditions in first-response calculation.
-- **`firstModel` (`string | null`)**: Re-renders UI to attach the winner badge and golden border.
+- **State Management**: Uses React standard hooks (`useState`, `useCallback`, `useEffect`, `useRef`) for deterministic, lightweight state transitions without heavy Redux/Zustand overhead.
+- **Design Tokens & Theming**: CSS custom properties handle light and dark mode styling with smooth color transitions and persistence in `localStorage`.
+- **Responsive Layout**: CSS Grid and Flexbox dynamically adapt the workspace from single-column mobile views to a 3-column side-by-side comparison matrix on desktop screens.
 
 ---
 
 ## 🛠️ Technology Stack
 
-| Technology | Verified Version | Layer / Purpose | Rationale |
+| Layer | Technology | Verified Version | Purpose / Documentation Link |
 | :--- | :--- | :--- | :--- |
-| **Java** | `21` (LTS) | Backend Runtime | LTS release with virtual threads and modern switch syntax. |
-| **Spring Boot** | `3.4.3` | Backend Framework | Robust, enterprise-grade REST architecture with auto-configuration. |
-| **Spring AI** | `1.0.0-M6` | AI Abstraction | Unified ChatClient interface eliminating vendor lock-in. |
-| **Maven** | `3.9+` (Wrapper) | Build Automation | Deterministic dependency resolution and reproducible builds. |
-| **React** | `19.0.0` | UI Library | Declarative UI rendering with optimal reconciliation performance. |
-| **Vite** | `6.2.0` | Frontend Bundler | Instant HMR and optimized production ES-module bundling. |
-| **Vanilla CSS** | Modern CSS3 | Styling Engine | Custom design tokens, glassmorphism, responsive grid without Tailwind bloat. |
-| **OpenAI GPT-4o** | Cloud API | AI Model | Multimodal flagship reasoning model. |
-| **Anthropic Claude** | Cloud API | AI Model | Frontier model renowned for nuanced writing and code analysis. |
-| **Ollama** | Local Engine | Inference Engine | Zero-cost, privacy-first local LLM execution. |
-| **DeepSeek-R1** | `deepseek-r1:14b` | AI Model | Open-weights reasoning model running on local hardware. |
+| **Language** | Java | `21` (LTS) | [Official Java Documentation](https://dev.java/) |
+| **Backend Framework** | Spring Boot | `3.4.3` | [Spring Boot Documentation](https://spring.io/projects/spring-boot) |
+| **AI Framework** | Spring AI | `1.0.0-M6` | [Spring AI Reference](https://docs.spring.io/spring-ai/reference/) |
+| **Build Tool** | Apache Maven | `3.9+` | [Maven Documentation](https://maven.apache.org/) |
+| **Frontend Framework** | React | `19.0.0` | [React Documentation](https://react.dev/) |
+| **Frontend Bundler** | Vite | `6.2.0` | [Vite Documentation](https://vite.dev/) |
+| **Styling** | Vanilla CSS | Modern CSS3 | Custom design system & CSS Grid |
+| **Cloud AI Model** | OpenAI GPT-4o | Cloud API | [OpenAI Documentation](https://platform.openai.com/docs/) |
+| **Cloud AI Model** | Anthropic Claude | Cloud API | [Anthropic Documentation](https://docs.anthropic.com/) |
+| **Local AI Engine** | Ollama | `deepseek-r1:14b` | [Ollama Documentation](https://ollama.com/) |
+| **Frontend Hosting** | Vercel | Cloud Edge | [Vercel Documentation](https://vercel.com/) |
 
 ---
 
@@ -564,14 +532,17 @@ All backend endpoints are stateless HTTP POST handlers accepting JSON payloads a
 | :--- | :--- | :--- | :--- |
 | `VITE_API_BASE_URL` | `http://localhost:8080` | `https://api.yourdomain.com` | Base URL pointing to the Spring Boot REST API. |
 
-> [!WARNING]
-> In production deployments, `VITE_API_BASE_URL` in the frontend must point to your deployed backend domain (e.g. `https://spring-ai-backend.railway.app`). Never leave it as `http://localhost:8080` in production!
+> [!CAUTION]
+> **Security Rules:**
+> 1. Never commit `.env` files containing live API keys.
+> 2. Never put OpenAI/Anthropic secret keys into the frontend `.env`.
+> 3. In production, update `VITE_API_BASE_URL` to point to your deployed backend URL.
 
 ---
 
 ## 💻 Local Development Guide
 
-Follow these exact commands for Windows PowerShell or Unix terminals:
+Follow these exact steps to run the application locally on Windows or Unix:
 
 ### Step 1: Clone the Repository
 ```bash
@@ -595,7 +566,7 @@ export SPRING_AI_ANTHROPIC_API_KEY="sk-ant-your-anthropic-api-key"
 # Navigate to Backend
 cd "d:\Java Full Stack\Spring AI\Backend"
 
-# Start Spring Boot application
+# Build and start Spring Boot
 mvn spring-boot:run
 ```
 *Backend initializes on `http://localhost:8080`.*
@@ -611,7 +582,7 @@ npm install
 # Start Vite dev server
 npm run dev
 ```
-*Frontend initializes on `http://localhost:5173`.*
+*Frontend initializes on `http://localhost:5173`. Open `http://localhost:5173` in your browser.*
 
 ---
 
@@ -644,36 +615,22 @@ npm run dev
 ## 🚀 Backend Deployment Guide
 
 > [!IMPORTANT]
-> **Understanding the Deployment Architecture**:
-> - **Frontend**: The React application is deployed to **Vercel** (`https://spring-ai-studio-psi.vercel.app/`).
-> - **Backend**: Spring Boot is a Java 21 application that requires a JVM-capable runtime (e.g., Railway, Render, AWS, Docker).
+> **Current Repository Status**:
+> - **Frontend**: Deployed live on Vercel (`https://spring-ai-studio-psi.vercel.app/`).
+> - **Backend**: Backend deployment is not currently configured in this repository.
 >
-> *Note: The sections below describe recommended production deployment workflows.*
-
-```text
-┌─────────────────────────┐          HTTPS API Requests          ┌───────────────────────────┐
-│     Vercel Edge CDN     │ ───────────────────────────────────> │     Railway / Render      │
-│  React 19 Frontend SPA  │                                      │  Spring Boot 3.4 Backend  │
-│                         │ <─────────────────────────────────── │                           │
-└─────────────────────────┘          JSON Response Payload       └───────────────────────────┘
-```
+> To run the backend in a production cloud environment, deploy Spring Boot to a Java 21 runtime platform (such as Railway, Render, AWS, or Docker).
 
 ### Recommended Option A: Deploying on Railway (GitHub-Based)
-[Railway](https://railway.com/) natively detects and builds Spring Boot applications from GitHub repositories.
-
 1. Create an account on [Railway.app](https://railway.app/).
 2. Click **New Project** → **Deploy from GitHub repo**.
 3. Select `Mohammad-Asfin/Spring-AI-Studio`.
 4. In Project Settings:
    - **Root Directory**: Set to `Backend`.
-   - **Build Command**: Leave default or `mvn clean package -DskipTests`.
+   - **Build Command**: `mvn clean package -DskipTests`.
    - **Start Command**: `java -jar target/*.jar`.
-5. Under **Variables**, add:
-   - `SPRING_AI_OPENAI_API_KEY`: Your production OpenAI key.
-   - `SPRING_AI_ANTHROPIC_API_KEY`: Your production Anthropic key.
-   - `PORT`: `8080`.
-6. Under **Networking**, click **Generate Public Domain** (e.g. `https://spring-ai-backend.up.railway.app`).
-7. Copy this URL for frontend configuration.
+5. Under **Variables**, add `SPRING_AI_OPENAI_API_KEY` and `SPRING_AI_ANTHROPIC_API_KEY`.
+6. Click **Generate Public Domain** to obtain your backend URL (e.g. `https://spring-ai-backend.up.railway.app`).
 
 ---
 
@@ -681,7 +638,6 @@ npm run dev
 
 *(Recommended Future Improvement: Add a `Dockerfile` to the `Backend/` directory)*
 
-**Sample `Backend/Dockerfile`:**
 ```dockerfile
 # Stage 1: Build JAR using Maven and JDK 21
 FROM eclipse-temurin:21-jdk-alpine AS build
@@ -703,7 +659,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 ---
 
-## ☁️ Frontend Vercel Deployment
+## ☁️ Vercel Frontend Deployment
 
 The React single-page application is deployed live at:
 **`https://spring-ai-studio-psi.vercel.app/`**
@@ -717,7 +673,7 @@ The React single-page application is deployed live at:
    - **Build Command**: `npm run build`
    - **Output Directory**: `dist`
 4. Under **Environment Variables**, add:
-   - `VITE_API_BASE_URL`: The public URL of your deployed backend (e.g. `https://spring-ai-backend.up.railway.app`).
+   - `VITE_API_BASE_URL`: The public URL of your deployed backend (e.g. `https://your-backend-domain.com`).
 5. Click **Deploy**.
 
 ---
@@ -737,8 +693,6 @@ To connect the deployed frontend with the deployed backend:
 ---
 
 ## 🔒 Security & Best Practices
-
-### Current Implementation vs. Production Recommendations
 
 | Security Aspect | Current Codebase Implementation | Recommended Production Hardening |
 | :--- | :--- | :--- |
@@ -807,10 +761,20 @@ Try these prompts to benchmark reasoning styles across models:
 
 ## 📈 Performance Considerations
 
-Observed benchmarking latency is governed by:
+Application-level response timing depends on:
 1. **Model Architecture**: Frontier models (`GPT-4o`) balance reasoning depth and speed; dense reasoning models (`deepseek-r1`) perform step-by-step chain-of-thought token generation.
 2. **Local Hardware Constraints**: Local Ollama token generation speed depends directly on available GPU VRAM bandwidth.
 3. **Geographic Network Latency**: Cloud API response times include TLS handshakes and physical network hops.
+
+---
+
+## 📸 Screenshots
+
+<div align="center">
+  <img src="Frontend/public/branding/spring-ai-studio-wordmark.png" alt="Spring AI Studio Interface" width="600" />
+</div>
+
+> *Tip: To add additional screenshots of the model comparison matrix or dark mode, save images to `Frontend/public/branding/` and embed them here.*
 
 ---
 
@@ -852,7 +816,7 @@ This project is open-source. Feel free to use, modify, and distribute for educat
 
 ---
 
-## 🔗 Important Links
+## 🔗 Important Documentation Links
 
 - **Live Frontend Application**: [https://spring-ai-studio-psi.vercel.app/](https://spring-ai-studio-psi.vercel.app/)
 - **GitHub Repository**: [https://github.com/Mohammad-Asfin/Spring-AI-Studio](https://github.com/Mohammad-Asfin/Spring-AI-Studio)
@@ -861,6 +825,8 @@ This project is open-source. Feel free to use, modify, and distribute for educat
 - **React 19 Documentation**: [https://react.dev/](https://react.dev/)
 - **Vite Documentation**: [https://vite.dev/](https://vite.dev/)
 - **Ollama Documentation**: [https://ollama.com/](https://ollama.com/)
+- **OpenAI Platform Documentation**: [https://platform.openai.com/docs/](https://platform.openai.com/docs/)
+- **Anthropic Documentation**: [https://docs.anthropic.com/](https://docs.anthropic.com/)
 - **Railway Spring Boot Deployment Guide**: [https://docs.railway.com/guides/spring-boot](https://docs.railway.com/guides/spring-boot)
 - **Render Docker Deployment Guide**: [https://render.com/docs/docker](https://render.com/docs/docker)
 
