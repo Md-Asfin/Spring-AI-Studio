@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import './App.css';
 
 const EXAMPLES = [
@@ -8,21 +8,25 @@ const EXAMPLES = [
   "Explain Spring AI ChatClient"
 ];
 
+const INITIAL_RESPONSES = {
+  openai:    { status: 'idle', data: null, error: null, reqMsg: null, time: 0 },
+  anthropic: { status: 'idle', data: null, error: null, reqMsg: null, time: 0 },
+  ollama:    { status: 'idle', data: null, error: null, reqMsg: null, time: 0 }
+};
+
 function App() {
-  const [prompt, setPrompt] = useState('');
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('theme') || 'light';
-  });
-  
-  const [responses, setResponses] = useState({
-    openai: { status: 'idle', data: null, error: null, time: 0 },
-    anthropic: { status: 'idle', data: null, error: null, time: 0 },
-    ollama: { status: 'idle', data: null, error: null, time: 0 }
-  });
+  const [prompt, setPrompt]   = useState('');
+  const [theme, setTheme]     = useState(() => localStorage.getItem('theme') || 'light');
+  const [responses, setResponses] = useState(INITIAL_RESPONSES);
+  const [firstModel, setFirstModel] = useState(null); // id of first successful model
+
+  // Ref so async callbacks never have a stale reference —
+  // guarantees first-response is set exactly once even with concurrent state updates
+  const firstModelRef = useRef(null);
 
   const models = [
-    { 
-      id: 'openai', 
+    {
+      id: 'openai',
       provider: 'OpenAI',
       name: 'GPT-4o',
       desc: 'Advanced reasoning and creativity',
@@ -36,8 +40,8 @@ function App() {
         </svg>
       )
     },
-    { 
-      id: 'anthropic', 
+    {
+      id: 'anthropic',
       provider: 'Anthropic',
       name: 'Claude',
       desc: 'Thoughtful, safe and helpful',
@@ -51,8 +55,8 @@ function App() {
         </svg>
       )
     },
-    { 
-      id: 'ollama', 
+    {
+      id: 'ollama',
       provider: 'Ollama',
       name: 'DeepSeek',
       desc: 'Run locally with Ollama',
@@ -75,76 +79,110 @@ function App() {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
-  };
+  const toggleTheme = () => setTheme(prev => prev === 'light' ? 'dark' : 'light');
 
-  const fetchModelResponse = async (model, promptText) => {
+  // ─── Fetch one model's response ──────────────────────────────────────────────
+  const fetchModelResponse = async (modelId, promptText) => {
     const startTime = performance.now();
     try {
       const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
-      const res = await fetch(`${baseUrl}/api/${model}/ask`, {
+      const res = await fetch(`${baseUrl}/api/${modelId}/ask`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: promptText })
       });
-      
+
       const data = await res.text();
-      const endTime = performance.now();
-      const timeSec = ((endTime - startTime) / 1000).toFixed(2);
-      
-      if (!res.ok) {
-        throw new Error(data || `Error ${res.status}`);
-      }
-      
-      return { data, time: timeSec, error: null };
+      const elapsed = ((performance.now() - startTime) / 1000).toFixed(2);
+
+      if (!res.ok) throw new Error(data || `Error ${res.status}`);
+
+      return { data, time: elapsed, error: null, reqMsg: null };
     } catch (error) {
-      const endTime = performance.now();
-      const timeSec = ((endTime - startTime) / 1000).toFixed(2);
-      
-      let errMsg = "Provider unavailable.";
-      let reqMsg = "API credentials are not configured.";
-      
-      if (error.message.includes("401") || error.message.includes("Incorrect API key")) {
-        reqMsg = `Set SPRING_AI_${model.toUpperCase()}_API_KEY`;
-      } else if (model === 'ollama') {
-        errMsg = "Requires Ollama";
-        reqMsg = "Run on http://localhost:11434";
+      const elapsed = ((performance.now() - startTime) / 1000).toFixed(2);
+
+      let errMsg = 'Provider unavailable.';
+      let reqMsg = 'API credentials are not configured.';
+
+      if (error.message.includes('401') || error.message.includes('Incorrect API key')) {
+        reqMsg = `Set SPRING_AI_${modelId.toUpperCase()}_API_KEY`;
+      } else if (modelId === 'ollama') {
+        errMsg = 'Requires Ollama';
+        reqMsg = 'Run on http://localhost:11434';
       }
-      
-      return { data: null, time: timeSec, error: errMsg, reqMsg };
+
+      return { data: null, time: elapsed, error: errMsg, reqMsg };
     }
   };
 
+  // ─── Submit — fire all three requests in parallel ─────────────────────────────
   const handleSubmit = useCallback(async () => {
     if (!prompt.trim()) return;
-    
-    const newResponses = {};
-    models.forEach(m => {
-      newResponses[m.id] = { status: 'loading', data: null, error: null, reqMsg: null, time: 0 };
+
+    // Reset first-model tracker
+    firstModelRef.current = null;
+    setFirstModel(null);
+
+    // Immediately set all cards to LOADING
+    setResponses({
+      openai:    { status: 'loading', data: null, error: null, reqMsg: null, time: 0 },
+      anthropic: { status: 'loading', data: null, error: null, reqMsg: null, time: 0 },
+      ollama:    { status: 'loading', data: null, error: null, reqMsg: null, time: 0 }
     });
-    setResponses(newResponses);
-    
+
+    // Fire all three — no await before any of them, so they start truly in parallel
     models.forEach(model => {
-      fetchModelResponse(model.id, prompt)
-        .then(res => {
-          setResponses(prev => ({
-            ...prev,
-            [model.id]: { 
-              status: res.error ? 'error' : 'success', 
-              data: res.data, 
-              error: res.error,
-              reqMsg: res.reqMsg,
-              time: res.time 
-            }
-          }));
-        });
+      fetchModelResponse(model.id, prompt).then(result => {
+        const finalStatus = result.error ? 'error' : 'success';
+
+        // Record first SUCCESSFUL response — ref ensures no race condition
+        if (finalStatus === 'success' && firstModelRef.current === null) {
+          firstModelRef.current = model.id;
+          setFirstModel(model.id);
+        }
+
+        // Update this card independently (other cards still loading)
+        setResponses(prev => ({
+          ...prev,
+          [model.id]: {
+            status: finalStatus,
+            data: result.data,
+            error: result.error,
+            reqMsg: result.reqMsg,
+            time: result.time
+          }
+        }));
+      });
     });
   }, [prompt]);
 
+  // ─── Clear / Reset ────────────────────────────────────────────────────────────
+  const handleClear = () => {
+    setPrompt('');
+    setResponses(INITIAL_RESPONSES);
+    setFirstModel(null);
+    firstModelRef.current = null;
+  };
+
+  // ─── Benchmark Statistics (derived, never stale) ──────────────────────────────
+  const allResults   = Object.values(responses);
+  const hasAnyResult = allResults.some(r => r.status !== 'idle' && r.status !== 'loading');
+  const successList  = allResults.filter(r => r.status === 'success');
+  const errorList    = allResults.filter(r => r.status === 'error');
+  const successCount = successList.length;
+  const avgTime = successCount > 0
+    ? (successList.reduce((acc, r) => acc + parseFloat(r.time), 0) / successCount).toFixed(2)
+    : null;
+  const firstModelLabel = firstModel
+    ? models.find(m => m.id === firstModel)?.provider
+    : null;
+
+  const isRunning = allResults.some(r => r.status === 'loading');
+
   return (
     <div className="app-container">
-      {/* HEADER */}
+
+      {/* ── NAVBAR ── */}
       <header className="navbar">
         <div className="nav-container">
           <div className="brand">
@@ -153,7 +191,7 @@ function App() {
               <span className="brand-text-dark">Spring AI</span> <span className="brand-text-accent">Studio</span>
             </div>
           </div>
-          
+
           <nav className="nav-links">
             <a href="#" className="active">
               <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
@@ -172,7 +210,7 @@ function App() {
               About
             </a>
           </nav>
-          
+
           <div className="nav-actions">
             <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
               {theme === 'light' ? (
@@ -186,7 +224,8 @@ function App() {
       </header>
 
       <main className="main-content">
-        {/* HERO SECTION */}
+
+        {/* ── HERO ── */}
         <section className="hero">
           <img src="/branding/spring-ai-studio-logo.png" className="hero-logo" alt="Spring AI Studio Logo" />
           <h1 className="hero-title">
@@ -195,50 +234,105 @@ function App() {
           <p className="hero-subtitle">Compare and evaluate multiple LLM models side-by-side</p>
         </section>
 
-        {/* PROMPT WORKSPACE */}
+        {/* ── PROMPT WORKSPACE ── */}
         <section className="prompt-section" id="compare">
           <div className="prompt-box">
             <textarea
               className="prompt-textarea"
               placeholder="Type your prompt here to challenge the AI models..."
               value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              disabled={Object.values(responses).some(r => r.status === 'loading')}
+              onChange={e => setPrompt(e.target.value)}
+              disabled={isRunning}
             />
-            
+
             <div className="prompt-footer">
               <div className="prompt-examples">
                 <span className="examples-title">Try an example:</span>
                 <div className="examples-list">
                   {EXAMPLES.map((ex, i) => (
-                    <button key={i} className="example-chip" onClick={() => setPrompt(ex)}>
+                    <button key={i} className="example-chip" onClick={() => setPrompt(ex)} disabled={isRunning}>
                       {ex}
                     </button>
                   ))}
                 </div>
               </div>
-              <button 
-                className="submit-btn" 
-                onClick={handleSubmit}
-                disabled={!prompt.trim() || Object.values(responses).some(r => r.status === 'loading')}
-              >
-                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                Compare Models
-              </button>
+
+              <div className="prompt-actions">
+                {hasAnyResult && (
+                  <button className="clear-btn" onClick={handleClear} disabled={isRunning} title="Clear and reset">
+                    <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" strokeWidth="2" fill="none"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 .49-3.38"></path></svg>
+                    Clear
+                  </button>
+                )}
+                <button
+                  className="submit-btn"
+                  onClick={handleSubmit}
+                  disabled={!prompt.trim() || isRunning}
+                >
+                  <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                  {isRunning ? 'Running...' : 'Compare Models'}
+                </button>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* MODEL CARDS */}
+        {/* ── BENCHMARK STATS BAR ── */}
+        {hasAnyResult && (
+          <section className="benchmark-bar">
+            <div className="benchmark-stat">
+              <span className="bm-label">Models Tested</span>
+              <span className="bm-value">{models.length}</span>
+            </div>
+            <div className="benchmark-divider" />
+            <div className="benchmark-stat">
+              <span className="bm-label">Successful</span>
+              <span className="bm-value bm-success">{successCount}</span>
+            </div>
+            {errorList.length > 0 && (
+              <>
+                <div className="benchmark-divider" />
+                <div className="benchmark-stat">
+                  <span className="bm-label">Failed</span>
+                  <span className="bm-value bm-error">{errorList.length}</span>
+                </div>
+              </>
+            )}
+            {firstModelLabel && (
+              <>
+                <div className="benchmark-divider" />
+                <div className="benchmark-stat">
+                  <span className="bm-label">⚡ First Response</span>
+                  <span className="bm-value bm-first">{firstModelLabel}</span>
+                </div>
+              </>
+            )}
+            {avgTime && (
+              <>
+                <div className="benchmark-divider" />
+                <div className="benchmark-stat">
+                  <span className="bm-label">Avg Response</span>
+                  <span className="bm-value">{avgTime}s</span>
+                </div>
+              </>
+            )}
+          </section>
+        )}
+
+        {/* ── MODEL CARDS ── */}
         <section className="cards-section">
           {models.map(model => {
             const res = responses[model.id];
-            const hasStarted = res.status !== 'idle';
-            
+            const isIdle = res.status === 'idle';
+            const isFirst = firstModel === model.id;
+
             return (
-              <div key={model.id} className="model-card" style={{ '--card-color': model.color }}>
-                
-                {/* Header matching Screenshot 2 style */}
+              <div
+                key={model.id}
+                className={`model-card${isFirst ? ' card-first' : ''}`}
+                style={{ '--card-color': model.color }}
+              >
+                {/* Card Header */}
                 <div className="card-header">
                   <div className="card-icon" style={{ backgroundColor: theme === 'light' ? model.bgLight : '#1e293b', color: model.color }}>
                     {model.icon}
@@ -247,15 +341,26 @@ function App() {
                     {model.type}
                   </div>
                 </div>
-                
+
+                {/* Card Title */}
                 <div className="card-title-area">
                   <h3>{model.provider} ({model.name})</h3>
                   <p>{model.desc}</p>
                 </div>
-                
-                {/* Body Content */}
+
+                {/* ⚡ First Response Badge */}
+                {isFirst && (
+                  <div className="first-badge">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    First Response
+                  </div>
+                )}
+
+                {/* Card Body */}
                 <div className="card-body">
-                  {!hasStarted && (
+
+                  {/* IDLE — show prerequisite hint */}
+                  {isIdle && (
                     <div className="error-box" style={{ backgroundColor: theme === 'light' ? model.bgLight : '#1e293b' }}>
                       <div className="error-title">
                         <span className="dot" style={{ backgroundColor: model.color }}></span>
@@ -267,38 +372,57 @@ function App() {
                     </div>
                   )}
 
+                  {/* LOADING */}
                   {res.status === 'loading' && (
                     <div className="loading-state">
-                      <div className="pulse-dot" style={{ backgroundColor: model.color }}></div>
+                      <div className="spinner-dots">
+                        <span style={{ backgroundColor: model.color }}></span>
+                        <span style={{ backgroundColor: model.color }}></span>
+                        <span style={{ backgroundColor: model.color }}></span>
+                      </div>
                       <span>Generating...</span>
                     </div>
                   )}
 
+                  {/* SUCCESS */}
                   {res.status === 'success' && (
-                    <div className="response-content">
-                      {res.data}
-                    </div>
-                  )}
-                  
-                  {res.status === 'error' && (
-                    <div className="error-box error-box-active">
-                      <div className="error-title">
-                        <span className="dot" style={{ backgroundColor: '#ef4444' }}></span>
-                        {res.error}
+                    <>
+                      <div className="status-line status-success">
+                        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Completed
                       </div>
-                      <div className="error-desc">{res.reqMsg}</div>
-                    </div>
+                      <div className="response-content">{res.data}</div>
+                    </>
+                  )}
+
+                  {/* ERROR */}
+                  {res.status === 'error' && (
+                    <>
+                      <div className="status-line status-error">
+                        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        Failed
+                      </div>
+                      <div className="error-box error-box-active">
+                        <div className="error-title">
+                          <span className="dot" style={{ backgroundColor: '#ef4444' }}></span>
+                          {res.error}
+                        </div>
+                        <div className="error-desc">{res.reqMsg}</div>
+                      </div>
+                    </>
                   )}
                 </div>
 
-                {/* Footer with Timing & Copy */}
-                {res.status === 'success' && (
+                {/* Card Footer — timing + copy */}
+                {(res.status === 'success' || res.status === 'error') && (
                   <div className="card-footer">
                     <span className="timing">{res.time}s</span>
-                    <button className="copy-btn" onClick={() => navigator.clipboard.writeText(res.data)}>
-                      <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                      Copy
-                    </button>
+                    {res.status === 'success' && (
+                      <button className="copy-btn" onClick={() => navigator.clipboard.writeText(res.data)}>
+                        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        Copy
+                      </button>
+                    )}
                   </div>
                 )}
               </div>
@@ -307,13 +431,13 @@ function App() {
         </section>
       </main>
 
-      {/* FOOTER */}
+      {/* ── FOOTER ── */}
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-left">
             <span>Spring AI Studio</span>
             <span className="dot-sep">•</span>
-            <span>Built with Spring Boot & React</span>
+            <span>Built with Spring Boot &amp; React</span>
           </div>
           <div className="footer-right">
             <a href="https://github.com/Mohammad-Asfin/Spring-AI-Studio" target="_blank" rel="noreferrer">
